@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f1726">
+  <meta name="description" content="Li-Hsien Yen is an Economy & Systems Designer. Explore an interactive game portfolio and resume.">
+  <title>Li-Hsien Yen — Portfolio Quest</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="title-active">
+  <div id="title-screen" class="title-screen" role="dialog" aria-modal="true" aria-labelledby="title-name">
+    <button id="title-start" class="title-hit-area" type="button" aria-label="Click anywhere to start Portfolio Quest"></button>
+    <div class="title-top"><span>PORTFOLIO QUEST <b>✦</b> LI-HSIEN YEN</span><button class="recruiter-switch title-recruiter-switch" id="title-recruiter-toggle" type="button" role="switch" aria-checked="false" aria-label="View all portfolio content"><span class="recruiter-text">View all work</span><span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span></button></div>
+    <div class="title-aura" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="title-content"><div class="title-emblem" aria-hidden="true">LY<span>✦</span></div><div class="title-kicker">PLAYER ONE / ECONOMY & SYSTEMS DESIGNER</div><h1 id="title-name">Li-Hsien<br><em>Yen.</em></h1><p>Designing systems that make every choice feel meaningful.</p><div class="title-prompt"><span class="prompt-cursor" aria-hidden="true">▶</span><span>CLICK ANYWHERE TO START</span><span class="prompt-key">OR PRESS ENTER</span></div></div>
+    <div class="title-bottom"><span>✦ EVERY CLICK COUNTS</span><span>SELECT VIEW ALL WORK TO SKIP UNLOCKS</span><span>© LI-HSIEN YEN</span></div>
+  </div>
+  <div id="start-transition" class="start-transition" hidden aria-hidden="true"><div class="gate-rings"><span></span><span></span><span></span></div><div class="gate-copy"><span>✦ PORTFOLIO QUEST</span><strong>LOADING PLAYER FILE</strong><div class="gate-progress"><i></i></div></div></div>
+  <div class="app-shell" inert>
+    <header class="topbar">
+      <button class="brand" data-go="home" aria-label="Portfolio Quest home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span><strong>PORTFOLIO<span class="brand-accent">QUEST</span></strong><small>PLAYABLE RESUME / PROTOTYPE</small></span>
+      </button>
+      <div class="topbar-right">
+        <button class="points-pill" id="points-open" type="button" aria-label="Open points wallet"><span class="coin" aria-hidden="true">✦</span><span id="points" aria-live="polite">0</span><small>POINTS</small><span class="points-chevron" aria-hidden="true">⌄</span><span id="points-fx" aria-hidden="true"></span></button>
+        <button class="recruiter-switch" id="recruiter-toggle" type="button" role="switch" aria-checked="false" aria-label="View all portfolio content"><span class="recruiter-text">View all</span><span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span></button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Portfolio navigation">
+        <div class="sidebar-kicker">YOUR JOURNEY <span>05 AREAS</span></div>
+        <div id="journey-meter" class="journey-meter" aria-label="Menu exploration progress"><div><span>MENU EXPLORATION</span><strong id="journey-percent">0%</strong></div><div class="journey-track" role="progressbar" aria-label="Menu exploration" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="journey-fill"></span></div><small id="journey-detail">0 of 4 areas visited</small><div class="journey-finale" aria-hidden="true"><span class="journey-finale-label">QUEST COMPLETE</span><span class="journey-dancer"><span>♪└(・ω・)┐</span><span>┌(・ω・)┘♪</span><span>♪ヾ(・ω・)ﾉ</span><span>ヽ(・ω・)ﾉ♪</span><span>♪┌(・ω・)┐</span><span>└(・ω・)┘♪</span><span>♪╰(・ω・)╯</span><span>╰(・ω・)╯♪</span></span></div><div id="journey-burst" class="journey-burst" aria-hidden="true"></div></div>
+        <nav id="main-nav" class="nav-list"></nav>
+        <div id="desk-avatar" class="desk-avatar" role="img" aria-label="Pixel avatar typing at a computer"><div class="avatar-caption"><span id="avatar-activity">DESK MODE</span><span id="avatar-speed">STEADY</span></div><svg viewBox="0 0 160 116" aria-hidden="true" focusable="false" shape-rendering="crispEdges"><rect x="8" y="99" width="144" height="7" fill="#456750"/><rect x="35" y="84" width="90" height="15" fill="#66896b"/><rect x="51" y="53" width="53" height="36" fill="#294d37"/><rect x="61" y="20" width="37" height="33" fill="#f0bdab"/><rect x="55" y="14" width="43" height="13" fill="#283944"/><rect x="54" y="27" width="8" height="17" fill="#283944"/><rect x="93" y="28" width="8" height="13" fill="#283944"/><rect x="69" y="36" width="5" height="5" fill="#22313c"/><rect x="86" y="36" width="5" height="5" fill="#22313c"/><rect x="74" y="47" width="13" height="4" fill="#b87662"/><rect x="54" y="60" width="48" height="31" fill="#477a52"/><rect x="55" y="82" width="12" height="18" fill="#31553f"/><rect x="89" y="82" width="12" height="18" fill="#31553f"/><g class="avatar-arm avatar-arm-left"><rect x="41" y="60" width="13" height="25" fill="#477a52"/><rect x="37" y="80" width="14" height="8" fill="#f0bdab"/></g><g class="avatar-arm avatar-arm-right"><rect x="101" y="60" width="13" height="25" fill="#477a52"/><rect x="105" y="80" width="14" height="8" fill="#f0bdab"/></g><g class="avatar-computer"><rect x="17" y="75" width="39" height="18" fill="#263b4c"/><rect x="20" y="78" width="33" height="11" fill="#a7c0e1"/><rect x="24" y="81" width="10" height="3" fill="#d7e6ff"/><rect x="19" y="93" width="39" height="4" fill="#263b4c"/></g><g class="avatar-controller"><rect x="24" y="79" width="32" height="13" fill="#263b4c"/><rect x="29" y="84" width="8" height="3" fill="#e0f3d3"/><rect x="32" y="81" width="3" height="9" fill="#e0f3d3"/><rect x="45" y="83" width="4" height="4" fill="#b7f0ad"/><rect x="49" y="87" width="4" height="4" fill="#ef9bac"/></g></svg><p id="avatar-line">One curious click at a time.</p></div>
+        <div class="sidebar-bottom">
+          <div class="side-note"><span class="note-star">✦</span><p><strong>How this works</strong><br>Every click earns 1 point. Explore, collect, and unlock the portfolio at your pace.</p></div>
+          <button id="reset-button" class="text-button" type="button">↺ Reset progress</button>
+        </div>
+      </aside>
+
+      <main id="main-content" tabindex="-1">
+        <section id="home" class="screen active" aria-labelledby="home-title">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <div class="eyebrow"><span class="live-dot"></span> WELCOME TO THE PROTOTYPE <span class="eyebrow-line"></span> LEVEL 01</div>
+              <h1 id="home-title">A portfolio<br>you can <em>play.</em></h1>
+              <p class="hero-lede">An interactive resume built around the thing I love most: designing systems that make exploration feel rewarding.</p>
+              <div class="hero-actions"><button class="button primary" data-go="about">Start exploring <span>↗</span></button><button class="button ghost" id="hero-recruiter">Just show me everything <span>→</span></button></div>
+              <div class="hero-micro"><span class="micro-avatar" aria-hidden="true">LY</span><span><strong>Li-Hsien Yen</strong><br><small>Economy & Systems Designer</small></span><a class="hero-linkedin" href="https://www.linkedin.com/in/li-hsien-yen/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+            </div>
+            <div class="hero-visual" aria-label="Illustration of a portfolio progression path">
+              <div class="visual-grid"></div>
+              <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+              <button class="orbit-node node-one" type="button" aria-label="Retention: Tutorial Funnel, D1, D7, D30">✦<span class="node-tooltip"><strong>Retention</strong><span>Tutorial Funnel, D1, D7, D30</span></span></button><button class="orbit-node node-two" type="button" aria-label="Monetization: Conversion, ARPDAU, ARPPU, LTV">◇<span class="node-tooltip"><strong>Monetization</strong><span>Conversion, ARPDAU, ARPPU, LTV</span></span></button><button class="orbit-node node-three" type="button" aria-label="Tooling: Spreadsheets, AI-assisted workflow, automation">✧<span class="node-tooltip"><strong>Tooling</strong><span>Spreadsheets, AI-assisted workflow, automation</span></span></button>
+              <div class="profile-card"><div class="card-top"><span class="tiny-squares">▦</span><span>PLAYER PROFILE</span><span class="card-dots">•••</span></div><div class="card-avatar">LY<span class="avatar-spark">✦</span></div><div class="card-name">LI-HSIEN YEN</div><div class="card-role">ECONOMY & SYSTEMS DESIGNER</div><div class="card-divider"></div><div class="card-stats"><span><strong>01</strong><small>PLAYER</small></span><span><strong>∞</strong><small>CURIOSITY</small></span><span><strong>+1</strong><small>PER CLICK</small></span></div></div>
+              <div id="profile-events" class="profile-events" aria-live="polite"></div>
+              <div class="visual-caption">YOUR STORY, ONE DISCOVERY AT A TIME.</div>
+            </div>
+          </div>
+          <div class="dashboard-grid">
+            <div class="panel quest-panel"><div class="panel-heading"><div><span class="overline">CURRENT OBJECTIVES</span><h2>Your first quest</h2></div><span class="panel-icon">↗</span></div><p>Get to know the person behind the work. Mini-Games is open from the start; projects and resume unlock through exploration.</p><button class="quest-action" data-go="about"><span class="quest-arrow">→</span><span>Explore the introduction</span><span class="quest-reward">+5 discovery points</span></button></div>
+            <div class="panel progress-panel"><div class="panel-heading"><div><span class="overline">PROGRESSION</span><h2>Unlock the story</h2></div><span class="panel-icon">✦</span></div><div class="progress-track"><span id="progress-fill"></span></div><div class="progress-label"><span id="unlock-count">1 of 4 areas open</span><span id="next-unlock">Next: Projects · 18 pts</span></div><p class="muted">Your choices shape the path. Recruiter view opens every area instantly.</p></div>
+          </div>
+        </section>
+
+        <section id="about" class="screen" aria-labelledby="about-title">
+          <div class="section-head"><div><div class="eyebrow"><span class="live-dot"></span> AREA 01 / INTRODUCTION</div><h1 id="about-title">Meet the <em>designer.</em></h1><p>I design game economies, progression, and Live Ops systems that give players clear goals and meaningful choices.</p></div><span class="area-badge">OPEN AREA ✦</span></div>
+          <div class="about-grid"><article class="feature-card"><span class="card-kicker">LI-HSIEN YEN / GAME DESIGN FIRST</span><h2>Systems should make the next choice feel worth making.</h2><p>I’ve built and tuned player-facing systems from pre-launch through Live Ops: the progression and economy for <strong class="game-title-text">Shovel Up!</strong>, refreshed old and made new key systems for <strong class="game-title-text">Kingdom Maker</strong>, and the Backstage Pass for <strong class="game-title-text">Skullgirls Mobile</strong>. I like tracing a player problem to its underlying rules, then shaping rewards, pacing, and feedback around a better experience.</p><p>My product management experience helps me connect that design work to outcomes. At SEGA of America I was a Product Manager on <strong class="game-title-text">Sonic Dash</strong> and a new unannounced title; elsewhere I’ve partnered with Product, Analytics, and Engineering on experiments, tooling, and roadmap decisions.</p><div class="about-proof">A recent example: rebuilding the Backstage Pass point curve, task difficulty, and rewards lifted revenue 35.3% and unique buyers 38.8%.</div></article><div class="stat-stack"><div class="stat-card"><span>01 / GAME DESIGN</span><strong>Economies & progression</strong><p>Resources, unlock order, reward pacing, and player guidance across mobile and Meta Horizon games.</p></div><div class="stat-card"><span>02 / LIVE OPERATIONS</span><strong>Iteration with evidence</strong><p>Offer cadence, event rewards, bundle performance, and progression changes informed by player behavior.</p></div><div class="stat-card"><span>03 / PRODUCT LENS</span><strong>Tools that free teams</strong><p>Spreadsheet and AI-assisted workflows that let designers tune and validate systems with less routine engineering support.</p></div></div></div>
+          <div class="next-quest"><span class="next-icon">✦</span><div><small>NEXT QUEST</small><strong>See the work behind the ideas</strong></div><button class="button small" data-go="projects">Explore projects <span>→</span></button></div>
+        </section>
+
+        <section id="projects" class="screen" aria-labelledby="projects-title">
+          <div class="section-head"><div><div class="eyebrow"><span class="live-dot"></span> AREA 02 / THE WORK</div><h1 id="projects-title">Projects worth <em>exploring.</em></h1><p>Browse the released games below, then explore the case study blueprints I’ll build out next.</p></div><span class="area-badge">PORTFOLIO ✦</span></div>
+          <div class="gallery-heading"><div><span class="overline">SELECTED RELEASED TITLES</span><h2>Games I helped shape.</h2></div><p>My contributions, scope, and results come first. Each card’s footer separates title-wide milestones from the work I contributed.</p></div>
+          <div id="game-gallery" class="game-gallery"></div>
+          <p class="gallery-credit">Promotional artwork belongs to the respective rights holders. An art source is linked on every card.</p>
+          <div class="case-study-heading"><span class="overline">IN PROGRESS</span><h2>Case studies to build out next.</h2></div>
+          <div class="sample-banner">✧ Illustrative project cards — these are examples of structure and presentation, not claims about completed work.</div>
+          <div id="projects-grid" class="projects-grid"></div>
+          <div class="next-quest"><span class="next-icon" aria-hidden="true">≡</span><div><small>NEXT / CAREER FILE</small><strong>Explore the experience behind the work</strong></div><button id="projects-resume-next" class="button small" type="button" data-go="resume">Next: Resume <span aria-hidden="true">→</span></button></div>
+        </section>
+
+        <section id="resume" class="screen" aria-labelledby="resume-title">
+          <div class="section-head"><div><div class="eyebrow"><span class="live-dot"></span> AREA 03 / CAREER FILE</div><h1 id="resume-title">The traditional <em>view.</em></h1><p>A fast, readable summary for people who want the details without playing through the game.</p></div><span class="area-badge">RESUME ✦</span></div>
+          <div class="resume-view-bar"><div><span class="overline">CHOOSE YOUR VIEW</span><p>Explore the full story or focus on a discipline.</p></div><div class="resume-filters" role="group" aria-label="Resume view"><button type="button" data-resume-view="combined" aria-pressed="true" aria-controls="experience-list">Combined</button><button type="button" data-resume-view="design" aria-pressed="false" aria-controls="experience-list">Game Design</button><button type="button" data-resume-view="product" aria-pressed="false" aria-controls="experience-list">Product Management</button></div><p id="resume-view-status" class="resume-view-status" role="status" aria-live="polite" aria-atomic="true"></p></div>
+          <div class="resume-grid"><article class="resume-main"><div class="resume-top"><div class="resume-avatar">LY</div><div><small>LI-HSIEN YEN</small><h2>Economy & Systems Designer</h2><p id="resume-subtitle">Game design · Product management perspective</p></div></div><div class="resume-divider"></div><div class="resume-block"><span>PROFILE</span><p id="resume-profile">Game designer specializing in economy design, progression, monetization, and Live Ops. I’ve owned systems from concept through launch, improved live features through data-informed iteration, and built tools that give design teams more autonomy. My Product Manager role at SEGA and cross-functional work bring a product perspective to player-centered design.</p></div><div class="resume-block"><span>FOCUS</span><p id="resume-focus"></p></div><div class="resume-block experience-block"><span>EXPERIENCE</span><div id="experience-list" class="experience-list"></div></div><div class="resume-block"><span>TOOLS & METHODS</span><p>Unity, Unreal Engine, Google Sheets, Excel, SQL, A/B testing frameworks, Jira, Confluence, Git, Perforce, Figma, and Miro.</p></div><div class="resume-block"><span>EDUCATION</span><p>Associate Degree in Liberal Arts · De Anza Community College</p></div></article><aside class="resume-side"><div class="resume-side-card"><span class="overline">CONNECT</span><h3>Keep the conversation going.</h3><p>Explore the career timeline here, or reach out directly.</p><a class="resume-link" href="https://www.linkedin.com/in/li-hsien-yen/" target="_blank" rel="noopener noreferrer">↗ LinkedIn <span>PROFILE</span></a><a class="resume-link" href="mailto:lihsien.yen@gmail.com">✉ Email <span>CONTACT</span></a></div><div class="resume-side-tip"><strong>Recruiter view is always available.</strong><p>The header switch opens every section and case study instantly, without requiring points.</p></div></aside></div>
+        </section>
+
+        <section id="arcade" class="screen" aria-labelledby="arcade-title">
+          <div class="section-head"><div><div class="eyebrow"><span class="live-dot"></span> AREA 04 / MINI-GAMES</div><h1 id="arcade-title">Play, then <em>progress.</em></h1><p>Each game can grow into its own progression system. Focus Sprint is the first playable experiment.</p></div><span class="area-badge">ARCADE ✦</span></div>
+          <button id="tuning-open" class="tuning-entry" type="button">⚙ Tune unlock costs</button>
+          <div class="arcade-grid">
+            <article class="game-card">
+              <div class="game-header"><span class="game-chip">MINI-GAME 001</span><span>10-SECOND CHALLENGE</span></div>
+              <h2>Focus Sprint</h2>
+              <p>Hit the target for 10 seconds. Each hit earns portfolio Points and Focus Sprint Hit Points you can invest between runs.</p>
+              <div class="game-arena" id="game-arena">
+                <div class="arena-tabs" id="arena-tabs" hidden><button id="sprint-view-play" type="button" aria-pressed="true">✦ Play area</button><button id="sprint-view-tree" type="button" aria-pressed="false">◇ Skill tree</button></div>
+                <div id="sprint-play" class="sprint-play">
+                  <div class="game-meter"><span>TIME <strong id="game-time">10.0s</strong></span><span>HITS <strong id="game-hits">0</strong></span><span>VALUE <strong id="game-value">+1</strong></span></div>
+                  <button id="game-target" class="game-target" type="button" disabled><span>✦</span><strong>HIT ME</strong></button>
+                  <button id="game-bonus" class="game-bonus" type="button" hidden>+10 <small>QUICK!</small></button>
+                  <div id="game-message" class="game-message">Ready when you are.</div>
+                </div>
+                <section id="focus-tree" class="focus-tree" aria-labelledby="tree-title" hidden>
+                  <div class="tree-heading"><div><span class="overline">FOCUS SPRINT / SKILL TREE</span><h3 id="tree-title">Build your next run.</h3><p>Select a node to see its effect. Invest Hit Points to unlock it.</p></div><div class="tree-wallet"><span>HIT POINTS</span><strong id="tree-balance">0</strong><small><span id="tree-earned">0</span> earned · <span id="tree-spent">0</span> invested</small></div></div>
+                  <div class="tree-scroll" aria-label="Scrollable skill tree map"><div id="tree-body" class="tree-body"></div></div>
+                  <div id="node-popover" class="node-popover" role="group" aria-label="Selected skill details" hidden></div>
+                  <div class="tree-bottom"><p id="tree-message" role="status" aria-live="polite">Select a node to inspect it.</p><button id="tree-tune" class="tree-tune" type="button">⚙ Tune node costs</button></div>
+                </section>
+              </div>
+              <button id="game-start" class="button primary game-start" type="button">Start sprint <span>→</span></button>
+              <div class="game-upgrade"><small>LIVE PROGRESSION</small><span>Hit Points</span><span>Efficiency</span><span>Cosmetic effects</span><span>More to discover</span></div>
+            </article>
+            <aside class="arcade-aside">
+              <article class="arcade-future" id="blitz-card"><span>◈</span><small>FUTURE MINI-GAME 002</small><h3>Balance Blitz</h3><p>A reserved slot for a short economy game we can design together.</p><div class="future-cost">DESIGN PLACEHOLDER</div></article>
+              <article class="arcade-future secondary" id="draft-card"><span>⌁</span><small>FUTURE MINI-GAME 003</small><h3>Path Draft</h3><p>A reserved slot for a short progression game we can design together.</p><div class="future-cost">DESIGN PLACEHOLDER</div></article>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+    <footer><span>PORTFOLIO QUEST <span class="footer-dot">✦</span> INTERACTIVE PROTOTYPE</span><span>BUILT TO BE EXPLORED, DESIGNED TO BE SKIMMED.</span></footer>
+  </div>
+  <dialog id="points-dialog" class="points-dialog" aria-labelledby="wallet-title">
+    <div class="wallet-head"><div><span class="overline">YOUR POINTS WALLET</span><h2 id="wallet-title">Keep the momentum.</h2></div><button id="points-close" class="wallet-close" type="button" aria-label="Close points wallet">×</button></div>
+    <div class="wallet-balance"><span>✦</span><strong id="wallet-points">0</strong><small>CURRENT POINTS</small></div>
+    <p class="wallet-how">Earn points by clicking, spending time exploring, discovering pages, and playing mini-games.</p>
+    <div class="wallet-section-title">OPTIONAL SUPPORT <span>DESIGN PREVIEW</span></div>
+    <div class="support-grid"><button class="support-card" data-support="coffee" type="button"><span class="support-icon">☕</span><span class="support-name">Buy me a Coffee</span><span class="support-price">$5</span><small>Proposed reward: +50 points</small></button><button class="support-card" data-support="bento" type="button"><span class="support-icon">🍱</span><span class="support-name">Buy me a Bento Box</span><span class="support-price">$20</span><small>Proposed reward: +250 points</small></button></div>
+    <p class="wallet-notice" id="wallet-notice">Payments are not connected in this prototype. No purchase or point grant will happen here.</p>
+    <div class="motivation-box"><button id="motivation-button" class="motivation-button" type="button">✦ Click here for some motivation! <span>↗</span></button><div id="motivation-stage" class="motivation-stage" aria-live="polite">A little encouragement goes a long way.</div></div>
+  </dialog>
+  <dialog id="tuning-dialog" class="points-dialog tuning-dialog" aria-labelledby="tuning-title"><div class="wallet-head"><div><span class="overline">PROTOTYPE CONTROLS</span><h2 id="tuning-title">Tune unlock costs.</h2></div><button id="tuning-close" class="wallet-close" type="button" aria-label="Close tuning controls">×</button></div><p>Try new point requirements below. Changes are saved in this browser only; send me your preferred values to make them the default for everyone.</p><div id="tuning-fields" class="tuning-fields"></div><div class="tuning-actions"><button id="tuning-reset" class="button ghost" type="button">Reset defaults</button><button id="tuning-save" class="button primary" type="button">Save costs</button></div><p id="tuning-message" class="tuning-message" role="status" aria-live="polite"></p></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <aside id="journey-celebration" class="journey-celebration" hidden aria-label="Exploration achievement"><span class="journey-medal" aria-hidden="true">✦</span><div><span class="journey-celebration-kicker">QUEST COMPLETE</span><strong>Every area discovered!</strong><p>100% explored. Thanks for getting to know my work.</p></div><button id="journey-celebration-close" type="button" aria-label="Dismiss exploration celebration">×</button></aside>
+  <div id="journey-announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
