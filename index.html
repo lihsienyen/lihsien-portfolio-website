@@ -11,22 +11,22 @@
 </head>
 <body class="title-active">
   <div id="title-screen" class="title-screen" role="dialog" aria-modal="true" aria-labelledby="title-name">
-    <button id="title-start" class="title-hit-area" type="button" aria-label="Click anywhere to start Portfolio Quest"></button>
-    <div class="title-top"><span>PORTFOLIO QUEST <b>✦</b> LI-HSIEN YEN</span><button class="recruiter-switch title-recruiter-switch" id="title-recruiter-toggle" type="button" role="switch" aria-checked="false" aria-label="View all portfolio content"><span class="recruiter-text">View all work</span><span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span></button></div>
+    <div class="title-top"><span>PORTFOLIO QUEST <b>✦</b> LI-HSIEN YEN</span><span>AN INTERACTIVE PORTFOLIO</span></div>
     <div class="title-aura" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="title-content"><div class="title-emblem" aria-hidden="true">LY<span>✦</span></div><div class="title-kicker">PLAYER ONE / ECONOMY & SYSTEMS DESIGNER</div><h1 id="title-name">Li-Hsien<br><em>Yen.</em></h1><p>Designing systems that make every choice feel meaningful.</p><div class="title-prompt"><span class="prompt-cursor" aria-hidden="true">▶</span><span>CLICK ANYWHERE TO START</span><span class="prompt-key">OR PRESS ENTER</span></div></div>
-    <div class="title-bottom"><span>✦ EVERY CLICK COUNTS</span><span>SELECT VIEW ALL WORK TO SKIP UNLOCKS</span><span>© LI-HSIEN YEN</span></div>
+    <div class="title-content"><div class="title-emblem" aria-hidden="true">LY<span>✦</span></div><div class="title-kicker">ECONOMY & SYSTEMS DESIGNER</div><h1 id="title-name">Li-Hsien<br><em>Yen.</em></h1><p class="title-welcome">Welcome to my world of game design. I made this portfolio interactive to show how I think about choices, rewards, and progression. Choose the path that works for you.</p><div class="title-choices" role="group" aria-label="Choose how to explore"><button id="title-portfolio" class="title-choice title-choice-primary" type="button"><span class="choice-icon" aria-hidden="true">▦</span><span><strong>Browse my work</strong><small>Projects, experience, and resume. No game required.</small></span><span class="choice-arrow" aria-hidden="true">↗</span></button><button id="title-play" class="title-choice" type="button"><span class="choice-icon" aria-hidden="true">✦</span><span><strong>Play the portfolio</strong><small>Explore, earn points, and try Focus Sprint.</small></span><span class="choice-arrow" aria-hidden="true">→</span></button></div></div>
+    <div class="title-bottom"><span>✦ TWO WAYS TO EXPLORE</span><span>SWITCH VIEWS ANYTIME</span><span>© LI-HSIEN YEN</span></div>
   </div>
   <div id="start-transition" class="start-transition" hidden aria-hidden="true"><div class="gate-rings"><span></span><span></span><span></span></div><div class="gate-copy"><span>✦ PORTFOLIO QUEST</span><strong>LOADING PLAYER FILE</strong><div class="gate-progress"><i></i></div></div></div>
   <div class="app-shell" inert>
     <header class="topbar">
       <button class="brand" data-go="home" aria-label="Portfolio Quest home">
         <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-        <span><strong>PORTFOLIO<span class="brand-accent">QUEST</span></strong><small>PLAYABLE RESUME / PROTOTYPE</small></span>
+        <span class="play-brand-label"><strong>PORTFOLIO<span class="brand-accent">QUEST</span></strong><small>PLAYABLE RESUME / PROTOTYPE</small></span><span class="portfolio-brand-label"><strong>Li-Hsien Yen</strong><small>ECONOMY & SYSTEMS DESIGNER</small></span>
       </button>
+      <nav class="portfolio-nav" aria-label="Portfolio navigation"><button type="button" data-go="home">Home</button><button type="button" data-go="about">About</button><button type="button" data-go="projects">Projects</button><button type="button" data-go="resume">Resume</button><a href="mailto:lihsien.yen@gmail.com">Contact</a></nav>
       <div class="topbar-right">
         <button class="points-pill" id="points-open" type="button" aria-label="Open points wallet"><span class="coin" aria-hidden="true">✦</span><span id="points" aria-live="polite">0</span><small>POINTS</small><span class="points-chevron" aria-hidden="true">⌄</span><span id="points-fx" aria-hidden="true"></span></button>
-        <button class="recruiter-switch" id="recruiter-toggle" type="button" role="switch" aria-checked="false" aria-label="View all portfolio content"><span class="recruiter-text">View all</span><span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span></button>
+        <div class="mode-switch" role="group" aria-label="Website view"><button id="recruiter-toggle" type="button" aria-pressed="false">Portfolio</button><button id="play-toggle" type="button" aria-pressed="true">Play</button></div>
       </div>
     </header>
 
@@ -44,12 +44,19 @@
 
       <main id="main-content" tabindex="-1">
         <section id="home" class="screen active" aria-labelledby="home-title">
+          <div class="portfolio-home" aria-labelledby="portfolio-home-title">
+            <div class="portfolio-intro"><div><span class="portfolio-kicker">LI-HSIEN YEN · GAME DESIGN</span><h1 id="portfolio-home-title">I design systems that make the next choice <em>matter.</em></h1><p>I'm an economy and systems designer focused on progression, rewards, and Live Ops. I've shaped player-facing systems from early concept through live games, with a product perspective on what works and why.</p><div class="portfolio-actions"><button class="button primary" data-go="projects">See my work <span>↗</span></button><button class="button ghost" data-go="resume">Read my resume <span>→</span></button></div><div class="portfolio-contact"><a href="https://www.linkedin.com/in/li-hsien-yen/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="mailto:lihsien.yen@gmail.com">Email me ↗</a></div></div><div class="portfolio-intro-art" aria-hidden="true"><span class="portfolio-art-ring"></span><span class="portfolio-art-card"><small>PLAYER-CENTERED SYSTEMS</small><strong>LY</strong><span>ECONOMY · PROGRESSION · LIVE OPS</span></span></div></div>
+            <div class="portfolio-section-heading"><div><span class="portfolio-kicker">SELECTED WORK</span><h2>Three ways I've shaped player experiences.</h2></div><button class="portfolio-text-link" data-go="projects">All projects ↗</button></div>
+            <div class="portfolio-highlight-grid"><article><img src="assets/skullgirls-mobile.jpg" alt="Skullgirls Mobile promotional artwork" loading="lazy"><div><small>SKULLGIRLS MOBILE · ECONOMY & MONETIZATION</small><h3>Reworked the Backstage Pass</h3><p>Redesigned its point curve, tasks, and rewards; pass revenue rose 35.3% and unique buyers rose 38.8%.</p></div></article><article><img src="assets/shovel-up.jpg" alt="Shovel Up! promotional artwork" loading="lazy"><div><small>SHOVEL UP! · ECONOMY & PROGRESSION</small><h3>Built a clearer path forward</h3><p>Owned progression and economy from concept to launch, then added Objectives and Quests in response to playtest feedback.</p></div></article><article><img src="assets/kingdom-maker.jpg" alt="Kingdom Maker promotional artwork" loading="lazy"><div><small>KINGDOM MAKER · SYSTEMS DESIGN</small><h3>Refreshed systems and tooling</h3><p>Designed and tuned key systems and built a tool that cut weekly event reporting from two days to one hour.</p></div></article></div>
+            <div class="portfolio-footer-cta"><p>This site is also a playable design experiment. The <strong>Play</strong> view shows its points, unlocks, and Focus Sprint mini-game.</p><button type="button" data-mode="play">Try the interactive version ↗</button></div>
+          </div>
+          <div class="play-home">
           <div class="hero-grid">
             <div class="hero-copy">
               <div class="eyebrow"><span class="live-dot"></span> WELCOME TO THE PROTOTYPE <span class="eyebrow-line"></span> LEVEL 01</div>
               <h1 id="home-title">A portfolio<br>you can <em>play.</em></h1>
               <p class="hero-lede">An interactive resume built around the thing I love most: designing systems that make exploration feel rewarding.</p>
-              <div class="hero-actions"><button class="button primary" data-go="about">Start exploring <span>↗</span></button><button class="button ghost" id="hero-recruiter">Just show me everything <span>→</span></button></div>
+              <div class="hero-actions"><button class="button primary" data-go="about">Start exploring <span>↗</span></button><button class="button ghost" id="hero-recruiter">Browse portfolio <span>→</span></button></div>
               <div class="hero-micro"><span class="micro-avatar" aria-hidden="true">LY</span><span><strong>Li-Hsien Yen</strong><br><small>Economy & Systems Designer</small></span><a class="hero-linkedin" href="https://www.linkedin.com/in/li-hsien-yen/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
             </div>
             <div class="hero-visual" aria-label="Illustration of a portfolio progression path">
@@ -63,7 +70,8 @@
           </div>
           <div class="dashboard-grid">
             <div class="panel quest-panel"><div class="panel-heading"><div><span class="overline">CURRENT OBJECTIVES</span><h2>Your first quest</h2></div><span class="panel-icon">↗</span></div><p>Get to know the person behind the work. Mini-Games is open from the start; projects and resume unlock through exploration.</p><button class="quest-action" data-go="about"><span class="quest-arrow">→</span><span>Explore the introduction</span><span class="quest-reward">+5 discovery points</span></button></div>
-            <div class="panel progress-panel"><div class="panel-heading"><div><span class="overline">PROGRESSION</span><h2>Unlock the story</h2></div><span class="panel-icon">✦</span></div><div class="progress-track"><span id="progress-fill"></span></div><div class="progress-label"><span id="unlock-count">1 of 4 areas open</span><span id="next-unlock">Next: Projects · 18 pts</span></div><p class="muted">Your choices shape the path. Recruiter view opens every area instantly.</p></div>
+            <div class="panel progress-panel"><div class="panel-heading"><div><span class="overline">PROGRESSION</span><h2>Unlock the story</h2></div><span class="panel-icon">✦</span></div><div class="progress-track"><span id="progress-fill"></span></div><div class="progress-label"><span id="unlock-count">1 of 4 areas open</span><span id="next-unlock">Next: Projects · 18 pts</span></div><p class="muted">Your choices shape the path. Portfolio view opens the work and resume instantly.</p></div>
+          </div>
           </div>
         </section>
 
@@ -74,6 +82,8 @@
         </section>
 
         <section id="projects" class="screen" aria-labelledby="projects-title">
+          <div class="portfolio-projects"><div class="portfolio-page-head"><span class="portfolio-kicker">SELECTED PROJECTS</span><h1 id="portfolio-projects-title">Work and outcomes.</h1><p>These are the released games and systems I've helped shape. The featured work focuses on my contributions; the additional titles show the breadth of my experience.</p></div><div id="portfolio-project-list" class="portfolio-project-list"></div><div class="portfolio-section-heading portfolio-more-heading"><div><span class="portfolio-kicker">ADDITIONAL TITLES</span><h2>More shipped work.</h2></div></div><div id="portfolio-more-list" class="portfolio-more-list"></div><p class="portfolio-art-credit">Promotional artwork belongs to the respective rights holders. Artwork sources are linked on the featured cards.</p><div class="portfolio-project-next"><strong>Want the full career history?</strong><button class="button primary" data-go="resume">Read my resume <span>→</span></button></div></div>
+          <div class="play-projects">
           <div class="section-head"><div><div class="eyebrow"><span class="live-dot"></span> AREA 02 / THE WORK</div><h1 id="projects-title">Projects worth <em>exploring.</em></h1><p>Browse the released games below, then explore the case study blueprints I’ll build out next.</p></div><span class="area-badge">PORTFOLIO ✦</span></div>
           <div class="gallery-heading"><div><span class="overline">SELECTED RELEASED TITLES</span><h2>Games I helped shape.</h2></div><p>My contributions, scope, and results come first. Each card’s footer separates title-wide milestones from the work I contributed.</p></div>
           <div id="game-gallery" class="game-gallery"></div>
@@ -82,6 +92,7 @@
           <div class="sample-banner">✧ Illustrative project cards — these are examples of structure and presentation, not claims about completed work.</div>
           <div id="projects-grid" class="projects-grid"></div>
           <div class="next-quest"><span class="next-icon" aria-hidden="true">≡</span><div><small>NEXT / CAREER FILE</small><strong>Explore the experience behind the work</strong></div><button id="projects-resume-next" class="button small" type="button" data-go="resume">Next: Resume <span aria-hidden="true">→</span></button></div>
+          </div>
         </section>
 
         <section id="resume" class="screen" aria-labelledby="resume-title">

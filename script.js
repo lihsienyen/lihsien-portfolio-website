@@ -394,6 +394,15 @@ function renderGameGallery() {
     </article>`;
   }).join('');
 }
+function renderPortfolioProjects() {
+  $('#portfolio-project-list').innerHTML = GAME_GALLERY.slice(0, 3).map(game => `
+    <article class="portfolio-project-card">
+      <a href="${game.imageSource}" target="_blank" rel="noopener noreferrer" aria-label="View ${game.title} artwork source"><img src="assets/${game.image}" alt="Promotional artwork for ${game.title}" loading="lazy"></a>
+      <div><span class="portfolio-kicker">${game.role}</span><h2>${game.title}</h2><span class="portfolio-work-label">MY CONTRIBUTION</span><p>${GAME_CONTRIBUTIONS[game.id].summary}</p></div>
+    </article>`).join('');
+  $('#portfolio-more-list').innerHTML = GAME_GALLERY.slice(3).map(game => `
+    <article><span>${game.role}</span><h3>${game.title}</h3></article>`).join('');
+}
 
 function syncCosts() {
   AREA_META.find(a => a.id === 'projects').cost = costs.projects;
@@ -609,8 +618,16 @@ function claimBonus() {
 function updateUI() {
   $('#points').textContent = Math.floor(state.points).toLocaleString();
   $('#wallet-points').textContent = Math.floor(state.points).toLocaleString();
-  $('#recruiter-toggle').setAttribute('aria-checked', String(state.recruiter));
-  $('#title-recruiter-toggle').setAttribute('aria-checked', String(state.recruiter));
+  document.body.classList.toggle('portfolio-mode', state.recruiter);
+  $('#recruiter-toggle').setAttribute('aria-pressed', String(state.recruiter));
+  $('#play-toggle').setAttribute('aria-pressed', String(!state.recruiter));
+  $('.brand').setAttribute('aria-label', state.recruiter ? 'Li-Hsien Yen home' : 'Portfolio Quest home');
+  $('#home').setAttribute('aria-labelledby', state.recruiter ? 'portfolio-home-title' : 'home-title');
+  $('#projects').setAttribute('aria-labelledby', state.recruiter ? 'portfolio-projects-title' : 'projects-title');
+  document.querySelectorAll('.portfolio-nav [data-go]').forEach(button => {
+    if (button.dataset.go === state.active) button.setAttribute('aria-current', 'page');
+    else button.removeAttribute('aria-current');
+  });
   const count = AREA_META.filter(a => canAccess(a.id)).length;
   $('#unlock-count').textContent = `${count} of ${AREA_META.length} areas open`;
   $('#progress-fill').style.width = `${count / AREA_META.length * 100}%`;
@@ -644,16 +661,25 @@ function go(id) {
     toast(`${area.label} unlocked · −${area.cost} points`);
     celebrate('NEW AREA UNLOCKED', '↗');
   }
-  state.active = id; save(); updateUI(); discover(id);
-  if (id === 'home') revealHomeVisual();
+  state.active = id; save(); updateUI();
+  if (!state.recruiter) discover(id);
+  if (id === 'home' && !state.recruiter) revealHomeVisual();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   $('#main-content').focus({ preventScroll: true });
 }
 function toggleRecruiter(forceOn = false, announce = true) {
   state.recruiter = forceOn ? true : !state.recruiter;
+  if (state.recruiter && state.active === 'arcade') state.active = 'home';
   if (!state.recruiter && !canAccess(state.active)) state.active = 'home';
+  if (state.recruiter && $('#points-dialog').open) $('#points-dialog').close();
   save(); updateUI();
-  if (announce) toast(state.recruiter ? 'Recruiter view: everything is open' : 'Game view restored');
+  if (announce) toast(state.recruiter ? 'Portfolio view' : 'Play view');
+}
+function setMode(mode) {
+  if (state.recruiter !== (mode === 'portfolio')) toggleRecruiter(mode === 'portfolio', false);
+  else updateUI();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  $('#main-content').focus({ preventScroll: true });
 }
 function openProject(id) {
   const p = PROJECTS.find(x => x.id === id);
@@ -723,31 +749,31 @@ function hitGameTarget() {
   updateTreeWallet();
   pulseSprint();
 }
-function beginExperience() {
+function beginExperience(mode) {
   if ($('#title-screen').classList.contains('leaving')) return;
-  state.active = TUNING_MODE ? 'arcade' : state.recruiter ? 'projects' : 'home';
+  state.recruiter = mode === 'portfolio';
+  state.active = TUNING_MODE && !state.recruiter ? 'arcade' : 'home';
   save(); updateUI();
   $('#title-screen').classList.add('leaving');
   const transition = $('#start-transition');
-  transition.hidden = false;
-  transition.classList.add('playing');
+  if (!state.recruiter) { transition.hidden = false; transition.classList.add('playing'); }
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   setTimeout(() => {
     $('#title-screen').hidden = true;
     $('.app-shell').inert = false;
     document.body.classList.remove('title-active');
     window.scrollTo(0, 0);
-    if (state.recruiter) discover('projects');
-    if (TUNING_MODE) { discover('arcade'); renderTuningFields(); $('#tuning-dialog').showModal(); }
-    if (state.active === 'home') revealHomeVisual();
-  }, reduced ? 0 : 900);
+    if (TUNING_MODE && !state.recruiter) { discover('arcade'); renderTuningFields(); $('#tuning-dialog').showModal(); }
+    if (state.active === 'home' && !state.recruiter) revealHomeVisual();
+  }, reduced ? 0 : state.recruiter ? 320 : 900);
   setTimeout(() => {
     transition.hidden = true;
     transition.classList.remove('playing');
     $('#main-content').focus({ preventScroll: true });
-  }, reduced ? 10 : 2000);
+  }, reduced ? 10 : state.recruiter ? 340 : 2000);
 }
 document.addEventListener('click', event => {
+  if (document.body.classList.contains('title-active') || state.recruiter) return;
   addPoints(1);
   animateClickPoint();
   animateClickRipple(event);
@@ -757,8 +783,10 @@ document.addEventListener('click', event => {
   if (event.target.closest('#journey-celebration-close')) { dismissJourneyCelebration(); return; }
   const resumeFilter = event.target.closest('[data-resume-view]');
   if (resumeFilter) { setResumeView(resumeFilter.dataset.resumeView); return; }
-  if (event.target.closest('#title-recruiter-toggle')) { toggleRecruiter(false, false); return; }
-  if (event.target.closest('#title-start')) { beginExperience(); return; }
+  if (event.target.closest('#title-portfolio')) { beginExperience('portfolio'); return; }
+  if (event.target.closest('#title-play')) { beginExperience('play'); return; }
+  const modeControl = event.target.closest('[data-mode]');
+  if (modeControl) { setMode(modeControl.dataset.mode); return; }
   if (event.target.closest('#points-open')) { $('#points-dialog').showModal(); $('#points-close').focus(); return; }
   if (event.target.closest('#points-close')) { $('#points-dialog').close(); return; }
   if (event.target.closest('#tuning-open, #tree-tune')) { renderTuningFields(); $('#tuning-message').textContent = ''; $('#tuning-dialog').showModal(); return; }
@@ -788,7 +816,8 @@ document.addEventListener('click', event => {
     celebrate('GAME DISCOVERED', '✦');
     return;
   }
-  if (event.target.closest('#recruiter-toggle')) { toggleRecruiter(); return; }
+  if (event.target.closest('#recruiter-toggle')) { setMode('portfolio'); return; }
+  if (event.target.closest('#play-toggle')) { setMode('play'); return; }
   if (event.target.closest('#hero-recruiter')) { toggleRecruiter(true); go('projects'); return; }
   const investButton = event.target.closest('[data-tree-invest]');
   if (investButton) { investNode(investButton.dataset.treeInvest); return; }
@@ -838,18 +867,19 @@ $('#points-dialog').addEventListener('click', event => {
 });
 let visibleSeconds = 0;
 setInterval(() => {
-  if (document.visibilityState !== 'visible') return;
+  if (document.visibilityState !== 'visible' || document.body.classList.contains('title-active') || state.recruiter) return;
   visibleSeconds++;
   if (visibleSeconds >= 5) { visibleSeconds = 0; addPoints(1); }
 }, 1000);
 renderExperience();
 renderGameGallery();
+renderPortfolioProjects();
 syncCosts();
 updateUI();
 renderTree();
 const heroObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (!$('#title-screen').hidden || state.active !== 'home') return;
+    if (!$('#title-screen').hidden || state.active !== 'home' || state.recruiter) return;
     if (entry.isIntersecting && !$('.hero-visual').classList.contains('is-visible')) revealHomeVisual();
     if (!entry.isIntersecting) $('.hero-visual').classList.remove('is-visible');
   });
@@ -862,4 +892,12 @@ journeyObserver.observe($('#journey-meter'));
 const syncHeaderHeight = () => document.documentElement.style.setProperty('--topbar-height', `${Math.ceil($('.topbar').getBoundingClientRect().height)}px`);
 syncHeaderHeight();
 new ResizeObserver(syncHeaderHeight).observe($('.topbar'));
-$('#title-start').focus();
+if (new URLSearchParams(location.search).get('view') === 'portfolio') {
+  state.recruiter = true;
+  state.active = 'home';
+  save(); updateUI();
+  $('#title-screen').hidden = true;
+  $('.app-shell').inert = false;
+  document.body.classList.remove('title-active');
+  $('#main-content').focus({ preventScroll: true });
+} else $('#title-portfolio').focus();
